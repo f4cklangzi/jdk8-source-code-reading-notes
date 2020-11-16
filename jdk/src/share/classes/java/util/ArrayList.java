@@ -1323,7 +1323,7 @@ public class ArrayList<E> extends AbstractList<E>
         for (int i=0; modCount == expectedModCount && i < size; i++) {
             action.accept(elementData[i]);
         }
-        // 遍历过程中数组被修改会造成fast-fail
+        // 遍历过程中数组被修改会造成fail-fast
         if (modCount != expectedModCount) {
             throw new ConcurrentModificationException();
         }
@@ -1528,7 +1528,7 @@ public class ArrayList<E> extends AbstractList<E>
     public void sort(Comparator<? super E> c) {
         final int expectedModCount = modCount;
         Arrays.sort((E[]) elementData, 0, size, c);
-        // 排序过程中数组被修改也会造成fast-fail
+        // 排序过程中数组被修改也会造成fail-fast
         if (modCount != expectedModCount) {
             throw new ConcurrentModificationException();
         }
